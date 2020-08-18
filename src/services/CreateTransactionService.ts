@@ -22,8 +22,10 @@ class CreateTransactionService {
   }: Request): Promise<Transaction> {
     // TODO
 
-    const transactionsRepository = getCustomRepository(TransactionsRepository);
+    const transactionEntitie = getCustomRepository(Transaction);
     const categoryRepository = getRepository(Category);
+
+    const transactionsRepository = getCustomRepository(TransactionsRepository);
 
     const { total } = await transactionsRepository.getBalance();
 
@@ -45,16 +47,16 @@ class CreateTransactionService {
       await categoryRepository.save(transactionCategory);
     }
 
-    const transaction = transactionsRepository.create({
+    const newTransaction = transactionEntitie.create({
       title,
       value,
       type,
       category: transactionCategory,
     });
 
-    await transactionsRepository.save(transaction);
+    await transactionsRepository.save(newTransaction);
 
-    return transaction;
+    return newTransaction;
   }
 }
 
