@@ -22,7 +22,7 @@ class CreateTransactionService {
   }: Request): Promise<Transaction> {
     // TODO
 
-    const transactionEntity = getCustomRepository(Transaction);
+    const transactionEntity = getRepository(Transaction);
     const categoryRepository = getRepository(Category);
 
     const transactionsRepository = getCustomRepository(TransactionsRepository);
